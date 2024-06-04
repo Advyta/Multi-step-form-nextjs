@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function formSteps() {
+export default function Plans() {
   return (
     <div>
-      
+      Select your plan
     </div>
   )
 }

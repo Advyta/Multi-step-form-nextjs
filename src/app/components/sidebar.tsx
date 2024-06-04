@@ -2,12 +2,13 @@ import React from 'react'
 import sidebarDes from '../../../public/images/bg-sidebar-desktop.svg';
 import sidebarMob from '../../../public/images/bg-sidebar-mobile.svg';
 import Image from 'next/image';
+import StepLinks from './step-links';
 
 export default function Sidebar() {
   return (
     <div className='relative'>
       <div className="lg:absolute lg:inset-0 lg:px-8 py-8 lg:py-10 flex flex-row justify-center lg:justify-stretch lg:flex-col gap-4 lg:gap-6">
-        Sidebar
+        <StepLinks/>
       </div>
       <Image src={sidebarDes} alt='sidebar'
         priority
