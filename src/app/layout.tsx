@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { ubuntu } from "./ui/fonts";
 import "./globals.css";
 import Sidebar from "./components/sidebar";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Multi-step-form",
@@ -20,7 +18,7 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="../../public/images/favicon-32x32.png" sizes="any" />
       </head>
-      <body className='h-full bg-magnolia font-ubuntu flex flex-col justify-center items-center'>
+      <body className={`h-full bg-magnolia ${ubuntu.className} flex flex-col justify-center items-center`}>
         {/* main content */}
         <main className="font-normal relative w-full max-w-lg lg:max-w-[940px]">
           <div className="lg:bg-white w-full flex flex-col lg:flex-row px-4 lg:p-4 rounded-2xl lg:shadow-lg">
