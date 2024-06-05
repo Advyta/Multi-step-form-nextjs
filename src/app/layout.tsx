@@ -20,12 +20,16 @@ export default function RootLayout({
       </head>
       <body className={`h-full bg-magnolia ${ubuntu.className} flex flex-col justify-center items-center`}>
         {/* main content */}
-        <main className="font-normal relative w-full max-w-lg lg:max-w-[940px]">
-          <div className="lg:bg-white w-full flex flex-col lg:flex-row px-4 lg:p-4 rounded-2xl lg:shadow-lg">
+        <main className="font-normal relative w-full max-w-lg lg:max-w-[940px] lg:max-h-[600px]">
+          <div className="lg:bg-white w-full flex flex-col lg:flex-row px-4 lg:p-4 rounded-2xl lg:shadow-lg lg:max-h-[600px]">
             {/* Sidebar component */}
             <Sidebar />
             {/* Children / Form component */}
-            {children}
+            <div className='flex w-full'>
+              <div className='flex flex-col w-full h-full px-6 lg:px-[100px] pt-7 lg:pt-12 pb-8 lg:pb-4 bg-white lg:bg-transparent rounded-lg lg:rounded-none shadow-lg lg:shadow-none'>
+                {children}
+              </div>
+            </div>
           </div>
         </main>
       </body>

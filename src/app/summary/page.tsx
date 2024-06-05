@@ -1,10 +1,11 @@
 import React from 'react'
+import PageHeadings from '../components/page-headings'
 
 function Summary() {
   return (
-    <div>
-      Summary
-    </div>
+    <section>
+      <PageHeadings heading={'Finishing up'} discription={'Double-check everything looks OK before confirming.'} />
+    </section>
   )
 }
 
