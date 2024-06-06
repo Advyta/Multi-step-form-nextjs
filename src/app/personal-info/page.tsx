@@ -3,6 +3,8 @@ import React from 'react'
 import PageHeadings from '../components/page-headings';
 import clsx from 'clsx';
 import { useForm, SubmitHandler } from "react-hook-form";
+import Actions from '../components/actions';
+import { useRouter } from 'next/navigation';
 
 type inputs = {
   name: string,
@@ -11,8 +13,14 @@ type inputs = {
 }
 
 export default function PersonalInfo() {
+  const router = useRouter();
   const { register, handleSubmit, formState: { errors } } = useForm<inputs>();
-  const onSubmit: SubmitHandler<inputs> = data => console.log(data);
+  const onSubmit: SubmitHandler<inputs> = (data) => {
+    router.push('/plans');
+    console.log(data);
+  }
+
+  // console.log(watch("name"));
 
   return (
     <section>
@@ -25,16 +33,14 @@ export default function PersonalInfo() {
               Name
             </span>
             <span className="text-xs lg:text-sm font-medium lg:font-bold tracking-wide text-strawberry-red">
-              {/* error msg */}
+              {errors.name?.message}
             </span>
           </div>
           <input type="text"
             placeholder="e.g. Stephen King"
             className={clsx(
               'border',
-              //  errors.name
-              //    ? 'border-strawberry-red': 
-              'border-light-gray focus:border-purplish-blue',
+              errors.name ? 'border-strawberry-red' : 'border-light-gray focus:border-purplish-blue',
               'py-2 lg:py-3 px-3 lg:px-4 rounded-[4px] lg:rounded-lg mt-1',
               'text-[15px] lg:text-base text-marine-blue placeholder:text-cool-gray font-medium lg:font-bold',
               'focus:outline-none'
@@ -55,16 +61,14 @@ export default function PersonalInfo() {
               Email address
             </span>
             <span className="text-xs lg:text-sm font-medium lg:font-bold tracking-wide text-strawberry-red">
-              {/* error msg */}
+              {errors.email?.message}
             </span>
           </div>
           <input type="text"
             placeholder="e.g. stephenking@lorem.com"
             className={clsx(
               'border',
-              //  errors.name
-              //    ? 'border-strawberry-red': 
-              'border-light-gray focus:border-purplish-blue',
+              errors.email ? 'border-strawberry-red' : 'border-light-gray focus:border-purplish-blue',
               'py-2 lg:py-3 px-3 lg:px-4 rounded-[4px] lg:rounded-lg mt-1',
               'text-[15px] lg:text-base text-marine-blue placeholder:text-cool-gray font-medium lg:font-bold',
               'focus:outline-none'
@@ -85,16 +89,14 @@ export default function PersonalInfo() {
               Phone number
             </span>
             <span className="text-xs lg:text-sm font-medium lg:font-bold tracking-wide text-strawberry-red">
-              {/* error msg */}
+              {errors.phoneNo?.message}
             </span>
           </div>
           <input type="text"
             placeholder="e.g. +1 234 567 890"
             className={clsx(
               'border',
-              //  errors.name
-              //    ? 'border-strawberry-red': 
-              'border-light-gray focus:border-purplish-blue',
+              errors.phoneNo ? 'border-strawberry-red' : 'border-light-gray focus:border-purplish-blue',
               'py-2 lg:py-3 px-3 lg:px-4 rounded-[4px] lg:rounded-lg mt-1',
               'text-[15px] lg:text-base text-marine-blue placeholder:text-cool-gray font-medium lg:font-bold',
               'focus:outline-none'
@@ -102,19 +104,20 @@ export default function PersonalInfo() {
             {...register("phoneNo", {
               required: "This field is required",
               minLength: {
-                value: 20,
-                message: 'Phone number must have 10 digits'
+                value: 10,
+                message: 'Phone number must have at least 10 digits'
               }
-            })}
-          />
+            })}/>
         </label>
 
-        <button
-          type="submit"
-          className="bg-marine-blue hover:opacity-80 transition duration-300 text-magnolia ml-auto px-[17px] lg:px-8 py-[10px] lg:py-3 text-sm lg:text-base rounded-[4px] lg:rounded-lg"
-        >
-          Next Step
-        </button>
+        <Actions>
+          <button
+            type="submit"
+            className="bg-marine-blue hover:opacity-80 transition duration-300 text-magnolia ml-auto px-[17px] lg:px-8 py-[10px] lg:py-3 text-sm lg:text-base rounded-[4px] lg:rounded-lg">
+            Next Step
+          </button>
+        </Actions>
+
       </form>
     </section>
   )
