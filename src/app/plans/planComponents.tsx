@@ -11,7 +11,7 @@ type PlanKey = 'arcade' | 'advanced' | 'pro';
 type PlanComponentsProps = {
   billingType: string;
   selectedPlan: PlanKey;
-  setSelectedPlan: React.Dispatch<React.SetStateAction<PlanKey>>;
+  setSelectedPlan: (plan: PlanKey) => void;
   setCost: React.Dispatch<React.SetStateAction<number>>;
   plans: { [key in PlanKey]: {
     monthlyCost: number;

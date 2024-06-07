@@ -5,6 +5,7 @@ import PlanComponents from './planComponents'
 import Actions from '../components/actions';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { useBilling } from '../components/BillingContext';
 
 // Defining types
 type PlanKey = 'arcade' | 'advanced' | 'pro';
@@ -12,6 +13,8 @@ type Plan = {
   monthlyCost: number;
   yearlyCost: number;
 }
+
+// Defining Plans data object
 const plans: Record<PlanKey, Plan> = {
   arcade: { monthlyCost: 9, yearlyCost: 90 },
   advanced: { monthlyCost: 12, yearlyCost: 120 },
@@ -20,13 +23,23 @@ const plans: Record<PlanKey, Plan> = {
 
 export default function Plans() {
   const route = useRouter()
-  const [isChecked, setIsChecked] = useState(false);
-  const [billingType, setBillingType] = useState<string>('Monthly');
-  const [selectedPlan, setSelectedPlan] = useState<PlanKey>('arcade');
-  const [cost, setCost] = useState<number>(plans.arcade.monthlyCost);
+
+  // Defining and using billing type and Plan selection hooks from Billing context
+  const {billingType, setBillingType, selectedPlan, setSelectedPlan} = useBilling();
+
+  // if billingType === 'Yearly' is true isChecked is true and vise versa and is toggeled when the checkbox is toggled
+  const [isChecked, setIsChecked] = useState(billingType === 'Yearly');
+  // Setting cost wrt billing type from the context
+  const [cost, setCost] = useState<number>(billingType === 'Monthly' ? plans[selectedPlan].monthlyCost : plans[selectedPlan].yearlyCost);
 
   console.log(cost);
 
+  // /Is updated everytime there is a change in billing type
+  useEffect(() => {
+    setIsChecked(billingType === 'Yearly');
+  }, [billingType])
+
+  // Sets cost according to billing type on initial load
   useEffect(() => {
     const planCost = billingType === 'Monthly' ? plans[selectedPlan].monthlyCost : plans[selectedPlan].yearlyCost;
     setCost(planCost);
@@ -45,7 +58,7 @@ export default function Plans() {
     <section>
       <PageHeadings heading='Select your plan' discription='You have the option of monthly or yearly billing.' />
 
-      <div className='flex flex-col mt-5 lg:mt-8'>
+      <div className='flex flex-col mt-5 lg:mt-8 lg:pb-2'>
         <div className='flex flex-col lg:flex-row gap-x-4 gap-y-3'>
           <PlanComponents
             billingType={billingType}

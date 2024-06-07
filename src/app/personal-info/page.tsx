@@ -6,6 +6,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import Actions from '../components/actions';
 import { useRouter } from 'next/navigation';
 
+// types of inputs
 type inputs = {
   name: string,
   email: string,
@@ -14,36 +15,34 @@ type inputs = {
 
 export default function PersonalInfo() {
   const router = useRouter();
+
+  // defining form actions
   const { register, handleSubmit, formState: { errors } } = useForm<inputs>();
   const onSubmit: SubmitHandler<inputs> = (data) => {
     router.push('/plans');
     console.log(data);
   }
 
-  // console.log(watch("name"));
-
   return (
     <section>
       <PageHeadings heading={'Personal info'} discription={'Please provide your name, email address, and phone number.'} />
 
-      <form className="flex flex-col mt-6" onSubmit={handleSubmit(onSubmit)}>
+      {/* Form */}
+      <form className="flex flex-col mt-6 " onSubmit={handleSubmit(onSubmit)}>
         <label className='flex flex-col'>
           <div className="flex justify-between">
             <span className="capitalize text-xs text-marine-blue lg:text-sm font-medium tracking-wide">
               Name
             </span>
-            <span className="text-xs lg:text-sm font-medium lg:font-bold tracking-wide text-strawberry-red">
+            <span className="text-xs font-medium lg:font-bold tracking-wide text-strawberry-red">
               {errors.name?.message}
             </span>
           </div>
           <input type="text"
             placeholder="e.g. Stephen King"
             className={clsx(
-              'border',
+              'border py-2 lg:py-3 px-3 lg:px-4 rounded-[4px] lg:rounded-lg mt-1 text-[15px] lg:text-base text-marine-blue placeholder:text-cool-gray font-medium lg:font-bold focus:outline-none',
               errors.name ? 'border-strawberry-red' : 'border-light-gray focus:border-purplish-blue',
-              'py-2 lg:py-3 px-3 lg:px-4 rounded-[4px] lg:rounded-lg mt-1',
-              'text-[15px] lg:text-base text-marine-blue placeholder:text-cool-gray font-medium lg:font-bold',
-              'focus:outline-none'
             )}
             {...register("name", {
               required: "This field is required",
@@ -60,7 +59,7 @@ export default function PersonalInfo() {
             <span className="capitalize text-xs text-marine-blue lg:text-sm font-medium tracking-wide">
               Email address
             </span>
-            <span className="text-xs lg:text-sm font-medium lg:font-bold tracking-wide text-strawberry-red">
+            <span className="text-xs font-medium lg:font-bold tracking-wide text-strawberry-red">
               {errors.email?.message}
             </span>
           </div>
@@ -83,12 +82,12 @@ export default function PersonalInfo() {
           />
         </label>
 
-        <label className='flex flex-col mt-4'>
+        <label className='flex flex-col mt-4 lg:pb-4'>
           <div className="flex justify-between">
             <span className="capitalize text-xs text-marine-blue lg:text-sm font-medium tracking-wide">
               Phone number
             </span>
-            <span className="text-xs lg:text-sm font-medium lg:font-bold tracking-wide text-strawberry-red">
+            <span className="text-xs font-medium lg:font-bold tracking-wide text-strawberry-red">
               {errors.phoneNo?.message}
             </span>
           </div>
@@ -107,9 +106,10 @@ export default function PersonalInfo() {
                 value: 10,
                 message: 'Phone number must have at least 10 digits'
               }
-            })}/>
+            })} />
         </label>
 
+        {/* Link to next page */}
         <Actions>
           <button
             type="submit"
