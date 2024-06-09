@@ -42,7 +42,7 @@ export default function FinishingUp() {
 
         <div>
           {selectedAddOnsDetails.map(addOn => (
-            <div className="flex justify-between">
+            <div key={addOn.id} className="flex justify-between">
               <p className='text-cool-gray text-sm'>{addOn.name}</p>
               <p className="text-marine-blue font-medium text-sm">
                 +${billingType === 'Monthly' ? addOn.monthlyCost : addOn.yearlyCost}/{billingType === 'Monthly' ? 'mo' : 'yr'}
