@@ -5,22 +5,19 @@ import clsx from 'clsx';
 import { useForm, SubmitHandler } from "react-hook-form";
 import Actions from '../components/actions';
 import { useRouter } from 'next/navigation';
-
-// types of inputs
-type inputs = {
-  name: string,
-  email: string,
-  phoneNo: number,
-}
+import { useBilling, inputs } from '../components/BillingContext';
 
 export default function PersonalInfo() {
   const router = useRouter();
 
   // defining form actions
-  const { register, handleSubmit, formState: { errors } } = useForm<inputs>();
+  const {setPersonalInfoFilled, personalInfo, setPersonalInfo} = useBilling();
+  const { register, handleSubmit, formState: { errors } } = useForm<inputs>({defaultValues: personalInfo});
+
   const onSubmit: SubmitHandler<inputs> = (data) => {
+    setPersonalInfoFilled(true);
+    setPersonalInfo(data);
     router.push('/plans');
-    console.log(data);
   }
 
   return (

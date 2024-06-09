@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React from 'react'
 import PageHeadings from '../components/page-headings';
 import checkmark from '../../../public/images/icon-checkmark.svg'
 import Image from 'next/image';
@@ -7,47 +7,16 @@ import { useBilling } from '../components/BillingContext';
 import Actions from '../components/actions';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { addOns } from '../ui/billingdata';
 
 export default function AddOns() {
   const route = useRouter()
   const { billingType, selectedAddOns, toggleAddOn } = useBilling();
 
-  const addOns: {
-    [key: string]: {
-      id: number;
-      name: string;
-      description: string;
-      monthlyCost: number;
-      yearlyCost: number;
-    }
-  } = {
-    online: {
-      id: 1,
-      name: 'Online service',
-      description: 'Access to multiplayer games',
-      monthlyCost: 1,
-      yearlyCost: 10
-    },
-    storage: {
-      id: 2,
-      name: 'Larger storage',
-      description: 'Extra 1TB of cloud save',
-      monthlyCost: 2,
-      yearlyCost: 20
-    },
-    profile: {
-      id: 3,
-      name: 'Customizable profile',
-      description: 'Custom theme on your profile',
-      monthlyCost: 2,
-      yearlyCost: 20
-    },
-  }
-
   const nextPage = () => {
-    route.push('/add-ons');
+    route.push('/finishing-up');
   }
-
+  
   return (
     <section>
       <PageHeadings heading={'Pick add-ons'} discription={'Add-ons help enhance your gaming experience.'} />

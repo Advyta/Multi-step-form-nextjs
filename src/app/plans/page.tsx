@@ -6,20 +6,7 @@ import Actions from '../components/actions';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useBilling } from '../components/BillingContext';
-
-// Defining types
-type PlanKey = 'arcade' | 'advanced' | 'pro';
-type Plan = {
-  monthlyCost: number;
-  yearlyCost: number;
-}
-
-// Defining Plans data object
-const plans: Record<PlanKey, Plan> = {
-  arcade: { monthlyCost: 9, yearlyCost: 90 },
-  advanced: { monthlyCost: 12, yearlyCost: 120 },
-  pro: { monthlyCost: 15, yearlyCost: 150 }
-}
+import { plans } from '../ui/billingdata';
 
 export default function Plans() {
   const route = useRouter()

@@ -8,7 +8,7 @@ const links = [
   { name: 'Your Info', href: '/personal-info', pageNo: 1 },
   { name: 'Select Plan', href: '/plans', pageNo: 2 },
   { name: 'Add-Ons', href: '/add-ons', pageNo: 3 },
-  { name: 'Summary', href: '/summary', pageNo: 4 },
+  { name: 'Summary', href: '/finishing-up', pageNo: 4 },
 ];
 
 export default function StepLinks() {
